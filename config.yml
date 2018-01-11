@@ -1,0 +1,53 @@
+cmaUrl: http://192.168.1.158:5555/BuildAndPublish/BuildProgressAndroid
+serviceUrl: http://192.168.1.200/
+
+buildPoolSize: 1
+
+paths:
+  androidSdkHome: /home/artem/Android/Sdk
+  keytoolPath: /usr/bin/keytool
+  buildsHome: /home/artem/Tools/abs/builds
+  templatesHome: /home/artem/Tools/abs/ftl
+  projectTemplatesHome: /home/artem/Tools/abs/projects
+  downloadsHome: /home/artem/Tools/abs/downloads
+  
+swagger:
+  resourcePackage: "com.mo_apps.abs.api"
+  title: "Android Build System API"
+  version: "0.1-SNAPSHOT"
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 40000
+    - type: https
+      port: 40005
+      keyStorePath: /home/artem/Tools/abs/key.jks
+      keyStorePassword: sm7017236
+      validateCerts: false
+  adminConnectors:
+    - type: http
+      port: 40001
+    - type: https
+      port: 40006
+      keyStorePath: /home/artem/Tools/abs/key.jks
+      keyStorePassword: sm7017236
+      validateCerts: false
+  registerDefaultExceptionMappers: false
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: WARN
+  loggers:
+    com.mo_apps.abs: DEBUG
+  appenders:
+    - type: file
+      currentLogFilename: /var/log/moapps/abs.log
+      threshold: DEBUG
+      archive: true
+      archivedLogFilenamePattern: /var/log/moapps/abs-%d.log
+      archivedFileCount: 7
+      timeZone: UTC
+#    - type: console
